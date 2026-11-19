@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday Sassy!</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#ffe3ee;--bg2:#ffc2da;--ink:#6a1f4a;--soft:#a64d7d;--cream:#fff7f0;--rose:#e0407f;--gold:#ffc94d;--plate:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2a1030;--bg2:#4a1a4d;--ink:#ffe3f1;--soft:#e7a6cb;--plate:#f3d9e8}}
+:root[data-theme="dark"]{--bg1:#2a1030;--bg2:#4a1a4d;--ink:#ffe3f1;--soft:#e7a6cb;--plate:#f3d9e8}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(ellipse at 50% 20%,var(--bg2),var(--bg1) 75%);color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;-webkit-tap-highlight-color:transparent;user-select:none}
+.hint{font-weight:700;font-size:1.05rem;color:var(--soft);margin:0 1rem;min-height:1.6em;opacity:0;transition:opacity .6s}
+.stage{position:relative;width:min(88vw,420px);opacity:0;pointer-events:none;transition:opacity 1.2s}
+.stage.on{opacity:1;pointer-events:auto}
+.stage.done{opacity:.25;filter:blur(1px);pointer-events:none}
+svg{width:100%;height:auto;display:block;overflow:visible}
+.candle{cursor:pointer}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .5s ease-in-out infinite alternate}
+.glow{animation:glow 1.2s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.9,1.12) rotate(3deg)}}
+@keyframes glow{from{opacity:.35}to{opacity:.7}}
+.candle.out .flame,.candle.out .glow{opacity:0;animation:none;transition:opacity .15s}
+.smoke{opacity:0;fill:none;stroke:var(--soft);stroke-width:3;stroke-linecap:round}
+.candle.out .smoke{animation:smoke 1.6s ease-out forwards}
+@keyframes smoke{0%{opacity:.8;transform:translateY(0)}100%{opacity:0;transform:translateY(-34px)}}
+.cake-bob{animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+/* palace scene */
+.scene{position:fixed;inset:0;z-index:3;overflow:hidden;transition:opacity 1.2s;background:radial-gradient(circle at 78% 16%,#fff6d6 0 22px,rgba(255,246,214,.25) 24px 60px,transparent 62px),radial-gradient(1.5px 1.5px at 20% 12%,#fff 50%,transparent),radial-gradient(1.5px 1.5px at 60% 8%,#fff 50%,transparent),radial-gradient(2px 2px at 40% 22%,#fff 50%,transparent),radial-gradient(1.5px 1.5px at 90% 36%,#fff 50%,transparent),radial-gradient(1.5px 1.5px at 8% 30%,#fff 50%,transparent),linear-gradient(#150a2e,#3b1a5c 55%,#8a3a7a)}
+.scene.gone{opacity:0;pointer-events:none}
+.cam{position:absolute;inset:0;perspective:600px;perspective-origin:50% 45%}
+.cam.walking{animation:sway .8s ease-in-out infinite alternate}
+@keyframes sway{from{transform:translateY(-4px)}to{transform:translateY(5px)}}
+.world{position:absolute;left:50%;top:45%;width:0;height:0;transform-style:preserve-3d}
+.world.go{animation:walk 10s cubic-bezier(.45,0,.55,1) forwards}
+@keyframes walk{to{transform:translateZ(3700px)}}
+.world>*{position:absolute;left:0;top:0;transform-origin:0 0}
+.floor{width:400px;height:5200px;transform:translate3d(-200px,140px,800px) rotateX(-90deg);background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 2px,transparent 2px 100px),linear-gradient(90deg,#e8d5b0 0 27%,#d9b66a 27% 29%,#9d1c45 29% 71%,#d9b66a 71% 73%,#e8d5b0 73%)}
+.rail{width:5200px;height:90px;border-top:12px solid #e6c36f;background:repeating-linear-gradient(90deg,transparent 0 14px,#f3dfae 14px 22px),rgba(255,230,180,.1)}
+.pil{width:36px;height:520px;background:linear-gradient(90deg,#c9a24f,#fff3cf 45%,#b88a3a)}
+.arch{width:400px;height:200px;border:12px solid #e6c36f;border-bottom:0;border-radius:200px 200px 0 0;box-shadow:0 0 18px #ffd36b}
+.ch{width:70px;height:70px;border-radius:50%;background:radial-gradient(#fff6c8 0 12%,rgba(255,200,90,.5) 35%,transparent 70%)}
+.bb{width:300px;height:300px}
+.cap{position:fixed;left:0;right:0;bottom:calc(9% + env(safe-area-inset-bottom,0px));z-index:6;font:700 1.15rem 'Quicksand',sans-serif;color:#fff;text-shadow:0 2px 10px #000;opacity:0;pointer-events:none;transition:opacity 1s}
+.cap.on{opacity:1}
+/* curtain */
+.curtain{position:fixed;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;transition:visibility 0s 2.6s}
+.curtain.open{visibility:hidden}
+.cp{position:absolute;top:0;bottom:0;width:51%;background:repeating-linear-gradient(90deg,#6f0d2b 0 16px,#b81f4b 16px 34px,#8c1636 34px 52px);box-shadow:inset 0 0 60px rgba(0,0,0,.5);transition:transform 2.4s cubic-bezier(.7,0,.3,1)}
+.cp.l{left:0}.cp.r{right:0}
+.open .l{transform:translateX(-102%)}.open .r{transform:translateX(102%)}
+.val{position:absolute;top:0;left:0;right:0;height:60px;z-index:2;background:radial-gradient(circle at 24px 0,#c9922c 0 24px,transparent 25px) 0 100%/48px 26px repeat-x,linear-gradient(#ffd36b,#c9922c) top/100% 36px no-repeat;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4));transition:transform 2.4s,opacity 1s 1.6s}
+.open .val{opacity:0}
+.cta{position:relative;z-index:3;transition:opacity .6s;padding:0 1rem}
+.open .cta{opacity:0;pointer-events:none}
+.cta h2{font:400 clamp(2rem,9vw,3.4rem)/1.2 'Pacifico',cursive;margin:0 0 1.2rem;color:#ffe9a8;text-shadow:0 3px 12px #000}
+button{pointer-events:auto;font:700 1rem 'Quicksand',sans-serif;color:#fff;background:var(--rose);border:0;border-radius:999px;padding:.8rem 1.6rem;cursor:pointer;box-shadow:0 6px 0 #a82b5c}
+button:active{transform:translateY(3px);box-shadow:0 3px 0 #a82b5c}
+button:focus-visible,.candle:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.word{position:fixed;left:0;right:0;top:12%;z-index:6;font:400 clamp(2rem,9vw,3.6rem)/1.2 'Pacifico',cursive;color:var(--rose);text-shadow:0 3px 0 var(--cream),0 6px 18px rgba(224,64,127,.45);opacity:0;pointer-events:none}
+.word.on{animation:wpop 1.8s forwards}
+@keyframes wpop{0%{transform:scale(0) rotate(-6deg);opacity:0}18%{transform:scale(1.2) rotate(-3deg);opacity:1}30%{transform:scale(1) rotate(-3deg)}80%{transform:scale(1) rotate(-3deg);opacity:1}100%{transform:scale(1.05) rotate(-3deg);opacity:0}}
+/* finale */
+canvas{position:fixed;inset:0;pointer-events:none;z-index:4}
+.bg{position:fixed;inset:0;pointer-events:none;font-size:1.6rem;overflow:hidden;z-index:0}
+.bg span{position:absolute;bottom:-3rem;animation:rise linear infinite;opacity:.8}
+@keyframes rise{to{transform:translateY(-115vh) rotate(20deg)}}
+.pop{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:5}
+.pop h1{font-family:'Pacifico',cursive;font-weight:400;font-size:clamp(2.4rem,11vw,5rem);line-height:1.15;margin:0;color:var(--rose);text-shadow:0 3px 0 var(--cream),0 8px 24px rgba(224,64,127,.45);transform:scale(0) rotate(-8deg);opacity:0}
+.pop h1 b{display:block;font-size:1.25em;color:var(--ink);font-weight:400}
+.pop p{font-weight:700;font-size:1.15rem;margin:.8rem 1rem 0;opacity:0}
+.pop button{margin-top:1.4rem;opacity:0}
+.pop.show h1{animation:boom .9s cubic-bezier(.2,1.6,.4,1) forwards}
+.pop.show p{animation:fade .8s .7s forwards}
+.pop.show button{animation:fade .6s 1.2s forwards}
+@keyframes boom{to{transform:scale(1) rotate(-3deg);opacity:1}}
+@keyframes fade{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.flame,.glow,.cake-bob,.bg span,.cam.walking{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cb" viewBox="0 0 300 300">
+<ellipse cx="150" cy="276" rx="132" ry="14" fill="#fff"/><ellipse cx="150" cy="272" rx="120" ry="10" fill="#fff" opacity=".6"/>
+<rect x="48" y="196" width="204" height="72" rx="16" fill="#ff9ec6"/><rect x="48" y="196" width="204" height="20" rx="10" fill="#fff7f0"/>
+<path d="M48 210q12 22 24 0q12 22 24 0q12 22 24 0q12 22 24 0q12 22 24 0q12 22 24 0q12 22 24 0q12 22 24 0q12 22 12 0" fill="#fff7f0"/>
+<circle cx="78" cy="242" r="6" fill="#ffc94d"/><circle cx="118" cy="250" r="6" fill="#fff"/><circle cx="158" cy="242" r="6" fill="#ffc94d"/><circle cx="198" cy="250" r="6" fill="#fff"/><circle cx="228" cy="240" r="5" fill="#ffc94d"/>
+<rect x="78" y="136" width="144" height="66" rx="14" fill="#e0407f"/><rect x="78" y="136" width="144" height="18" rx="9" fill="#fff7f0"/>
+<path d="M78 148q9 18 18 0q9 18 18 0q9 18 18 0q9 18 18 0q9 18 18 0q9 18 18 0q9 18 18 0q9 18 18 0" fill="#fff7f0"/>
+<circle cx="104" cy="182" r="5" fill="#ffc94d"/><circle cx="150" cy="186" r="5" fill="#fff"/><circle cx="196" cy="182" r="5" fill="#ffc94d"/>
+</symbol></svg>
+
+<div class="bg" id="bg" aria-hidden="true"></div>
+
+<div class="scene" id="scene" aria-hidden="true"><div class="cam" id="cam"><div class="world" id="world">
+<div class="floor"></div>
+<div class="rail" style="transform:translate3d(200px,50px,800px) rotateY(90deg)"></div>
+<div class="rail" style="transform:translate3d(-200px,50px,800px) rotateY(90deg)"></div>
+<div class="bb" style="transform:translate3d(-150px,-145px,-3800px)"><svg viewBox="0 0 300 300"><use href="#cb" width="300" height="300"/>
+<rect x="100" y="98" width="12" height="40" rx="3" fill="#7fd6ff"/><rect x="144" y="88" width="12" height="50" rx="3" fill="#ffe36b"/><rect x="188" y="98" width="12" height="40" rx="3" fill="#b9f27c"/>
+<g fill="#ffb02e"><ellipse cx="106" cy="78" rx="7" ry="12"/><ellipse cx="150" cy="68" rx="7" ry="12"/><ellipse cx="194" cy="78" rx="7" ry="12"/></g></svg></div>
+</div></div></div>
+
+<div class="cap" id="cap">Walking to something sweet… 💖</div>
+
+<div class="curtain" id="cur">
+<div class="cp l"></div><div class="cp r"></div><div class="val"></div>
+<div class="cta"><h2>A surprise for Sassy 💖</h2><button id="open" type="button">Open the curtain</button></div>
+</div>
+
+<p class="hint" id="hint">Touch each candle to blow it out 🕯️</p>
+<div class="stage" id="stage">
+<svg viewBox="0 0 300 300" role="img" aria-label="Birthday cake with three candles">
+<g class="cake-bob"><use href="#cb" width="300" height="300"/>
+<g class="candle" tabindex="0" role="button" aria-label="Candle 1">
+<rect x="100" y="98" width="12" height="40" rx="3" fill="#7fd6ff"/><path d="M100 110l12-6M100 122l12-6M100 134l12-6" stroke="#fff" stroke-width="3" opacity=".8"/>
+<circle class="glow" cx="106" cy="84" r="18" fill="#ffd36b"/>
+<path class="flame" d="M106 62c9 9 9 20 0 28c-9-8-9-19 0-28z" fill="#ffb02e"/><path class="flame" d="M106 74c4 4 4 10 0 14c-4-4-4-10 0-14z" fill="#fff3b0"/>
+<path class="smoke" d="M106 90q-8-10 0-20q8-10 0-20"/><rect x="88" y="50" width="36" height="92" fill="transparent"/></g>
+<g class="candle" tabindex="0" role="button" aria-label="Candle 2">
+<rect x="144" y="88" width="12" height="50" rx="3" fill="#ffe36b"/><path d="M144 100l12-6M144 114l12-6M144 128l12-6" stroke="#fff" stroke-width="3" opacity=".8"/>
+<circle class="glow" cx="150" cy="74" r="18" fill="#ffd36b"/>
+<path class="flame" d="M150 52c9 9 9 20 0 28c-9-8-9-19 0-28z" fill="#ffb02e"/><path class="flame" d="M150 64c4 4 4 10 0 14c-4-4-4-10 0-14z" fill="#fff3b0"/>
+<path class="smoke" d="M150 80q-8-10 0-20q8-10 0-20"/><rect x="132" y="40" width="36" height="102" fill="transparent"/></g>
+<g class="candle" tabindex="0" role="button" aria-label="Candle 3">
+<rect x="188" y="98" width="12" height="40" rx="3" fill="#b9f27c"/><path d="M188 110l12-6M188 122l12-6M188 134l12-6" stroke="#fff" stroke-width="3" opacity=".8"/>
+<circle class="glow" cx="194" cy="84" r="18" fill="#ffd36b"/>
+<path class="flame" d="M194 62c9 9 9 20 0 28c-9-8-9-19 0-28z" fill="#ffb02e"/><path class="flame" d="M194 74c4 4 4 10 0 14c-4-4-4-10 0-14z" fill="#fff3b0"/>
+<path class="smoke" d="M194 90q-8-10 0-20q8-10 0-20"/><rect x="176" y="50" width="36" height="92" fill="transparent"/></g>
+</g></svg>
+</div>
+
+<canvas id="c"></canvas>
+<div class="word" id="word" aria-live="polite"></div>
+<div class="pop" id="pop" aria-live="polite">
+<h1>Happy Birthday<b>Sassy!</b></h1>
+<p>Wishing you a day as sweet as cake 🎂💖</p>
+<button id="again" type="button">Walk to the cake again</button>
+</div>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var world=$('world'),cam=$('cam'),scene=$('scene'),cap=$('cap'),cur=$('cur'),hint=$('hint'),stage=$('stage'),pop=$('pop');
+/* build the palace balcony */
+var h='';
+for(var z=400;z>-4000;z-=400){
+ [-1,1].forEach(function(s){h+='<i class="pil" style="transform:translate3d('+(s*200-18)+'px,-380px,'+z+'px)"></i>'});
+ h+='<i class="arch" style="transform:translate3d(-200px,-580px,'+z+'px)"></i>';
+ if(z%800===0)h+='<i class="ch" style="transform:translate3d(-35px,-330px,'+z+'px)"></i>';
+}
+world.insertAdjacentHTML('afterbegin',h);
+/* curtain -> walk -> cake */
+$('open').addEventListener('click',function(){
+ cur.classList.add('open');
+ setTimeout(function(){cap.classList.add('on');cam.classList.add('walking');world.classList.add('go')},1400);
+});
+world.addEventListener('animationend',function(){
+ cap.classList.remove('on');cam.classList.remove('walking');scene.classList.add('gone');
+ stage.classList.add('on');hint.style.opacity=1;
+});
+/* candles + confetti */
+var candles=[].slice.call(document.querySelectorAll('.candle')),out=0,done=false;
+var cv=$('c'),cx=cv.getContext('2d'),parts=[],raf=0;
+var cols=['#ff7eb6','#ffc94d','#7fd6ff','#b9f27c','#e0407f','#ffffff','#c9a6ff'];
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener('resize',size);
+function burst(x,y,n){for(var i=0;i<n;i++){var a=Math.random()*Math.PI*2,s=4+Math.random()*9;parts.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-5,g:.18+Math.random()*.1,w:6+Math.random()*7,h:4+Math.random()*6,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[i%cols.length],l:120+Math.random()*80})}if(!raf)loop()}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);parts=parts.filter(function(p){return p.l>0&&p.y<cv.height+20});parts.forEach(function(p){p.vy+=p.g;p.vx*=.992;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.globalAlpha=Math.min(1,p.l/40);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});raf=parts.length?requestAnimationFrame(loop):0}
+function showWord(t){var w=$('word');w.textContent=t;w.classList.remove('on');void w.offsetWidth;w.classList.add('on')}
+function blow(c){if(c.classList.contains('out')||done)return;c.classList.add('out');out++;showWord(['You’re cute 💖','You’re worth it ✨','We love you 💕'][out-1]);
+ var r=c.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height*.25,10);
+ if(out===1)hint.textContent='Keep going… 🌬️';
+ if(out===2)hint.textContent='One more! ✨';
+ if(out===candles.length){done=true;hint.style.opacity=0;setTimeout(celebrate,2000)}}
+function celebrate(){stage.classList.add('done');pop.classList.add('show');
+ var w=innerWidth,hh=innerHeight;[[.2,.3],[.8,.3],[.5,.2],[.3,.6],[.7,.6]].forEach(function(p,i){setTimeout(function(){burst(w*p[0],hh*p[1],70)},i*220)})}
+candles.forEach(function(c){c.addEventListener('pointerdown',function(e){e.preventDefault();blow(c)});c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();blow(c)}})});
+$('again').addEventListener('click',function(){
+ out=0;done=false;pop.classList.remove('show');stage.classList.remove('done','on');
+ candles.forEach(function(c){c.classList.remove('out')});
+ hint.textContent='Touch each candle to blow it out 🕯️';hint.style.opacity=0;
+ world.classList.remove('go');void world.offsetWidth;scene.classList.remove('gone');
+ setTimeout(function(){cap.classList.add('on');cam.classList.add('walking');world.classList.add('go')},500);
+});
+var bg=$('bg'),em=['🎈','💖','✨','🎀','🌸','🎉'];
+for(var i=0;i<14;i++){var s=document.createElement('span');s.textContent=em[i%em.length];s.style.left=(i*7.3+2)%96+'%';s.style.animationDuration=(9+Math.random()*9)+'s';s.style.animationDelay=(-Math.random()*14)+'s';bg.appendChild(s)}
+})();
+</script>
+</body>
+</html>
